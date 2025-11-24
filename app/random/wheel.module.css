@@ -1,0 +1,94 @@
+/* Разместите в styles/globals.css или используйте CSS-Modules */
+
+.wheel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 50px;
+}
+
+.wheel-pointer {
+    position: absolute;
+    top: 50%;
+    left: 50%; /* Сдвиг, чтобы стрелка была слева от центра */
+    z-index: 10;
+    /* Форма стрелки-указателя */
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    border-left: 25px solid #ff0000; /* Красный цвет */
+    transform: translate(-50%, -50%) translateX(-200px) rotate(90deg); 
+    /* Перемещение влево и поворот, чтобы указать на колесо */
+}
+
+.wheel {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    overflow: hidden;
+    /* Ключевой момент: анимация вращения с функцией замедления */
+    transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1); 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: 10px solid #fff;
+}
+
+.segment {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    /* Размер и форма клина: */
+    width: 200px; /* Радиус */
+    height: 400px; /* Диаметр */
+    transform-origin: 0% 50%; /* Центр вращения - левый край */
+    
+    /* Это сложная часть: для 18 сегментов (20°) нужно создать клиновидный сектор. */
+    /* Здесь используется упрощенная модель с прямоугольником. 
+       Для точной формы потребуется SVG или сложный clip-path. */
+    clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 0% 50%); 
+    width: 50%;
+    height: 100%;
+    transform-origin: right center;
+    
+    /* Сдвиг на 20 градусов для каждого сегмента */
+    transform: rotate(var(--angle)); 
+}
+
+.segment-text {
+    position: absolute;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    /* Позиционирование текста внутри сектора */
+    top: 50%;
+    left: 20px;
+    padding-left: 10px;
+    transform: translateY(-50%) rotate(10deg); /* Поворот текста на половину угла сегмента */
+    white-space: nowrap;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.spin-button {
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px #999;
+}
+
+.spin-button:hover {
+    background-color: #45a049;
+}
+
+.spin-button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 2px #666;
+    transform: translateY(2px);
+}
