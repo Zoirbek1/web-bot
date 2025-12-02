@@ -14,6 +14,7 @@ const Dash_Nav = () => {
       <Link href={`/dashboard/addc`}>
         <Button variant="light">Category qoshish</Button>
       </Link>
+        
     </Flex>
   );
 };
